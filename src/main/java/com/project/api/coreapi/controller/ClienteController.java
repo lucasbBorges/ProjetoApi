@@ -1,4 +1,4 @@
-package com.project.api.controller;
+package com.project.api.coreapi.controller;
 
 import com.project.api.domain.exceptions.cliente.ClienteExistenteException;
 import com.project.api.domain.model.Cliente;

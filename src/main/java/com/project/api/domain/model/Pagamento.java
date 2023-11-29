@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -22,7 +23,7 @@ public class Pagamento {
     @ManyToOne
     private Cliente cliente;
 
-    private Long valor;
+    private BigDecimal valor;
 
     private LocalDateTime dataPagamento;
 }
