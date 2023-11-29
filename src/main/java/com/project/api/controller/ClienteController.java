@@ -51,10 +51,7 @@ public class ClienteController {
         clienteVerifica = clienteService.buscarPorEmail(cliente.getEmail());
         clienteAtual = clienteService.buscar(id);
 
-        if(clienteVerifica != null
-                && !Objects.equals(clienteAtual.getId(), clienteVerifica.getId())){
-            throw new ClienteExistenteException();
-        }
+        clienteService.alteracaoEhValida(clienteVerifica, clienteAtual);
 
         BeanUtils.copyProperties(cliente, clienteAtual, "id",
                 "dataCadastro");

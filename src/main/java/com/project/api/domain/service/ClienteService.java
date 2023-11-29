@@ -11,6 +11,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class ClienteService {
@@ -32,12 +33,9 @@ public class ClienteService {
     }
 
     public Cliente salvar(Cliente cliente, ResourceEnum ENUM){
-        if (clienteRepository.findByEmail(cliente.getEmail()) != null){
-            if (ENUM == ResourceEnum.RESOURCE_POST) {
-                throw new ClienteExistenteException();
-            } else {
-                System.out.println("");
-            }
+        if (clienteRepository.findByEmail(cliente.getEmail()) != null
+            && ENUM == ResourceEnum.RESOURCE_POST){
+            throw new ClienteExistenteException();
         }
         return clienteRepository.save(cliente);
     }
@@ -48,6 +46,14 @@ public class ClienteService {
             clienteRepository.delete(cozinha);
         }catch (DataIntegrityViolationException e){
             throw new ClienteEmUsoException();
+        }
+    }
+
+    public void alteracaoEhValida(Cliente clienteRecebimento, Cliente clienteAtual){
+
+        if(clienteRecebimento != null
+                && !Objects.equals(clienteAtual.getId(), clienteRecebimento.getId())){
+            throw new ClienteExistenteException();
         }
     }
 }
