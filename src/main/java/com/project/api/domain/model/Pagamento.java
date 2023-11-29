@@ -16,6 +16,9 @@ public class Pagamento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Enumerated(EnumType.STRING)
+    private TipoPagamento tipoPagamento;
+
     @ManyToOne
     private Cliente cliente;
 
