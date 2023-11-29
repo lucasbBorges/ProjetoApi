@@ -1,5 +1,6 @@
 package com.project.api.coreapi.controller;
 
+import com.project.api.coreapi.model.ClienteDTO;
 import com.project.api.domain.exceptions.cliente.ClienteExistenteException;
 import com.project.api.domain.model.Cliente;
 import com.project.api.domain.model.ResourceEnum;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/clientes")
@@ -20,31 +22,31 @@ public class ClienteController {
     ClienteService clienteService;
 
     @GetMapping
-    public List<Cliente> listarClientes(){
-        return clienteService.listar();
+    public List<ClienteDTO> listarClientes(){
+        return toModelList(clienteService.listar());
     }
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/{clienteId}")
-    public Cliente buscarCliente(@PathVariable("clienteId") Long id) {
-        return clienteService.buscar(id);
+    public ClienteDTO buscarCliente(@PathVariable("clienteId") Long id) {
+        return toModel(clienteService.buscar(id));
     }
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/nome/{nome}")
-    public List<Cliente> buscarClientePorNome(@PathVariable("nome") String nome) {
-        return clienteService.buscarPorNome(nome);
+    public List<ClienteDTO> buscarClientePorNome(@PathVariable("nome") String nome) {
+        return toModelList(clienteService.buscarPorNome(nome));
     }
 
     @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping
-    public Cliente cadastrarCliente(@RequestBody Cliente cliente) {
-        return clienteService.salvar(cliente, ResourceEnum.RESOURCE_POST);
+    public ClienteDTO cadastrarCliente(@RequestBody Cliente cliente) {
+        return toModel(clienteService.salvar(cliente, ResourceEnum.RESOURCE_POST));
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "/{clienteid}")
-    public Cliente alterarCliente(@PathVariable("clienteid") Long id
+    public ClienteDTO alterarCliente(@PathVariable("clienteid") Long id
             , @RequestBody Cliente cliente) {
         Cliente clienteAtual, clienteVerifica;
 
@@ -55,13 +57,29 @@ public class ClienteController {
 
         BeanUtils.copyProperties(cliente, clienteAtual, "id",
                 "dataCadastro");
-        return clienteService.salvar(clienteAtual, ResourceEnum.RESOURCE_PUT);
+        return toModel(clienteService.salvar(clienteAtual, ResourceEnum.RESOURCE_PUT));
     }
 
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping(value = "/{clienteid}")
     public void remover(@PathVariable("clienteid") Long id) {
         clienteService.deletar(id);
+    }
+
+    private ClienteDTO toModel(Cliente cliente){
+        ClienteDTO clienteDTO = new ClienteDTO();
+        clienteDTO.setId(cliente.getId());
+        clienteDTO.setNome(cliente.getNome());
+        clienteDTO.setEmail(clienteDTO.getEmail());
+        clienteDTO.setCelular(cliente.getCelular());
+
+        return clienteDTO;
+    }
+
+    private List<ClienteDTO> toModelList(List<Cliente> clientes){
+        return clientes.stream()
+                .map(this::toModel)
+                .collect(Collectors.toList());
     }
 
 }
