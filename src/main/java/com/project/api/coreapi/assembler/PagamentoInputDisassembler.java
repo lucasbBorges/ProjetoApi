@@ -11,7 +11,7 @@ public class PagamentoInputDisassembler {
     @Autowired
     private ModelMapper modelMapper;
 
-    public Pagamento toDomainObject(PagamentoInput restauranteInput) {
-        return modelMapper.map(restauranteInput, Pagamento.class);
+    public Pagamento toDomainObject(PagamentoInput pagamentoInput) {
+        return modelMapper.map(pagamentoInput, Pagamento.class);
     }
 }
