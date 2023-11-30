@@ -3,6 +3,7 @@ package com.project.api.domain.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -13,6 +14,7 @@ import java.time.OffsetDateTime;
 @Table(name = "cliente")
 @Getter
 @Setter
+@ToString
 public class Cliente {
 
     @Id

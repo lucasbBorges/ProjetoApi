@@ -1,13 +1,19 @@
 package com.project.api.coreapi.controller;
 
+import com.project.api.coreapi.assembler.PagamentoInputDisassembler;
 import com.project.api.coreapi.model.ClienteDTO;
 import com.project.api.coreapi.model.PagamentoDTO;
+import com.project.api.coreapi.model.input.PagamentoInput;
+import com.project.api.domain.exceptions.NegocioException;
+import com.project.api.domain.exceptions.cliente.ClienteNaoExistenteException;
+import com.project.api.domain.exceptions.meiopagamento.MeioPagamentoNaoExistenteException;
 import com.project.api.domain.model.Pagamento;
 import com.project.api.domain.service.PagamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,6 +23,9 @@ public class PagamentoController {
 
     @Autowired
     PagamentoService pagamentoService;
+
+    @Autowired
+    PagamentoInputDisassembler pagamentoInputDisassembler;
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
@@ -38,8 +47,17 @@ public class PagamentoController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public PagamentoDTO cadastrarPagamento(@RequestBody Pagamento pagamento){
-        return toModel(pagamentoService.salvar(pagamento));
+    public PagamentoDTO cadastrarPagamento(@RequestBody PagamentoInput pagamentoInput){
+        try{
+            Pagamento pagamento = pagamentoInputDisassembler.toDomainObject(pagamentoInput);
+            pagamento.setDataPagamento(LocalDateTime.now());
+            System.out.println(pagamento);
+
+            return toModel(pagamentoService.salvar(pagamento));
+        }catch (ClienteNaoExistenteException | MeioPagamentoNaoExistenteException e){
+            throw new NegocioException(e.getMessage());
+        }
+
     }
 
     @ResponseStatus(HttpStatus.OK)

@@ -3,6 +3,7 @@ package com.project.api.domain.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 @Table(name = "pagamento")
 @Getter
 @Setter
+@ToString
 public class Pagamento {
 
     @Id
@@ -18,9 +20,11 @@ public class Pagamento {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "meio_pagamento_id", nullable = false)
     private MeioPagamento meioPagamento;
 
     @ManyToOne
+    @JoinColumn(name = "cliente_id", nullable = false)
     private Cliente cliente;
 
     private BigDecimal valor;

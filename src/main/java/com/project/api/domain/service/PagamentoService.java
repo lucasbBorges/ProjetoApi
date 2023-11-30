@@ -3,6 +3,7 @@ package com.project.api.domain.service;
 import com.project.api.domain.exceptions.pagamento.PagamentoEmUsoException;
 import com.project.api.domain.exceptions.pagamento.PagamentoNaoExistenteException;
 import com.project.api.domain.model.Cliente;
+import com.project.api.domain.model.MeioPagamento;
 import com.project.api.domain.model.Pagamento;
 import com.project.api.domain.model.repository.PagamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ public class PagamentoService {
 
     @Autowired
     private PagamentoRepository pagamentoRepository;
+
+    @Autowired
+    private MeioPagamentoService meioPagamentoService;
 
     @Autowired
     private ClienteService clienteService;
@@ -34,7 +38,8 @@ public class PagamentoService {
     }
 
     public Pagamento salvar(Pagamento pagamento){
-        Cliente cliente = clienteService.buscar(pagamento.getId());
+        Cliente cliente = clienteService.buscar(pagamento.getCliente().getId());
+        MeioPagamento meioPagamento = meioPagamentoService.buscar(pagamento.getMeioPagamento().getId());
 
         return pagamentoRepository.save(pagamento);
     }

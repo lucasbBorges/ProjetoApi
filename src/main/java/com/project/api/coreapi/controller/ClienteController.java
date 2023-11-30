@@ -70,7 +70,7 @@ public class ClienteController {
         ClienteDTO clienteDTO = new ClienteDTO();
         clienteDTO.setId(cliente.getId());
         clienteDTO.setNome(cliente.getNome());
-        clienteDTO.setEmail(clienteDTO.getEmail());
+        clienteDTO.setEmail(cliente.getEmail());
         clienteDTO.setCelular(cliente.getCelular());
 
         return clienteDTO;
