@@ -50,7 +50,7 @@ public class PagamentoController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @DeleteMapping(value = "/{pagamento}")
+    @DeleteMapping(value = "/{pagamentoid}")
     public void remover(@PathVariable("pagamentoid") Long id) {
         pagamentoService.deletar(id);
     }
