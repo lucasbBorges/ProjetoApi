@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -33,8 +34,13 @@ public class PagamentoService {
                 .orElseThrow(PagamentoNaoExistenteException::new);
     }
 
-    public List<Pagamento> buscarPorCliente(Long id){
-        return pagamentoRepository.findByClienteId(id);
+    public List<Pagamento> buscarPorCliente(Long clienteId, LocalDate dataIni, LocalDate dataFim){
+        if (dataIni == null || dataFim == null){
+            return pagamentoRepository.findByClienteId(clienteId);
+        }
+        return pagamentoRepository.findByClienteIdAndDataPagamentoBetween(
+                clienteId, dataIni, dataFim
+        );
     }
 
     public Pagamento salvar(Pagamento pagamento){

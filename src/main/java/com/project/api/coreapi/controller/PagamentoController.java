@@ -10,9 +10,11 @@ import com.project.api.domain.exceptions.meiopagamento.MeioPagamentoNaoExistente
 import com.project.api.domain.model.Pagamento;
 import com.project.api.domain.service.PagamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,9 +42,13 @@ public class PagamentoController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/cliente/{clienteid}")
-    public List<PagamentoDTO> buscarPagamentoPorNome(@PathVariable("clienteid") Long id){
-        return toModelList(pagamentoService.buscarPorCliente(id));
+    @GetMapping("/cliente")
+    public List<PagamentoDTO> buscarPagamentoPorNome(
+            @RequestParam Long clienteId,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataIni,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim
+    ){
+        return toModelList(pagamentoService.buscarPorCliente(clienteId, dataIni, dataFim));
     }
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -51,7 +57,6 @@ public class PagamentoController {
         try{
             Pagamento pagamento = pagamentoInputDisassembler.toDomainObject(pagamentoInput);
             pagamento.setDataPagamento(LocalDateTime.now());
-            System.out.println(pagamento);
 
             return toModel(pagamentoService.salvar(pagamento));
         }catch (ClienteNaoExistenteException | MeioPagamentoNaoExistenteException e){
