@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -14,7 +15,7 @@ public class PagamentoDTO {
     private Long id;
     private BigDecimal valor;
     private String tipoPagamento;
-    private LocalDateTime dataPagamento;
+    private LocalDate dataPagamento;
 
     private ClienteDTO cliente;
 }

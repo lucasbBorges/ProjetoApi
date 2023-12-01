@@ -56,7 +56,7 @@ public class PagamentoController {
     public PagamentoDTO cadastrarPagamento(@RequestBody PagamentoInput pagamentoInput){
         try{
             Pagamento pagamento = pagamentoInputDisassembler.toDomainObject(pagamentoInput);
-            pagamento.setDataPagamento(LocalDateTime.now());
+            pagamento.setDataPagamento(LocalDate.now());
 
             return toModel(pagamentoService.salvar(pagamento));
         }catch (ClienteNaoExistenteException | MeioPagamentoNaoExistenteException e){

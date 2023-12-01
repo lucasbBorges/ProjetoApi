@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -29,5 +30,5 @@ public class Pagamento {
 
     private BigDecimal valor;
 
-    private LocalDateTime dataPagamento;
+    private LocalDate dataPagamento;
 }
