@@ -24,7 +24,7 @@ public class Cliente {
 
     private String nome;
     private String email;
-    private Long celular;
+    private String celular;
 
     @CreationTimestamp
     @Column(nullable = false, columnDefinition = "datetime")

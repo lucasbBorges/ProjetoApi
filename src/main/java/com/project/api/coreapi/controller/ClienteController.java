@@ -22,31 +22,31 @@ public class ClienteController {
     ClienteService clienteService;
 
     @GetMapping
-    public List<ClienteDTO> listarClientes(){
-        return toModelList(clienteService.listar());
+    public List<Cliente> listarClientes(){
+        return clienteService.listar();
     }
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/{clienteId}")
-    public ClienteDTO buscarCliente(@PathVariable("clienteId") Long id) {
-        return toModel(clienteService.buscar(id));
+    public Cliente buscarCliente(@PathVariable("clienteId") Long id) {
+        return clienteService.buscar(id);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/nome/{nome}")
-    public List<ClienteDTO> buscarClientePorNome(@PathVariable("nome") String nome) {
-        return toModelList(clienteService.buscarPorNome(nome));
+    public List<Cliente> buscarClientePorNome(@PathVariable("nome") String nome) {
+        return clienteService.buscarPorNome(nome);
     }
 
     @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping
-    public ClienteDTO cadastrarCliente(@RequestBody Cliente cliente) {
-        return toModel(clienteService.salvar(cliente, ResourceEnum.RESOURCE_POST));
+    public Cliente cadastrarCliente(@RequestBody Cliente cliente) {
+        return clienteService.salvar(cliente, ResourceEnum.RESOURCE_POST);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "/{clienteid}")
-    public ClienteDTO alterarCliente(@PathVariable("clienteid") Long id
+    public Cliente alterarCliente(@PathVariable("clienteid") Long id
             , @RequestBody Cliente cliente) {
         Cliente clienteAtual, clienteVerifica;
 
@@ -57,7 +57,7 @@ public class ClienteController {
 
         BeanUtils.copyProperties(cliente, clienteAtual, "id",
                 "dataCadastro");
-        return toModel(clienteService.salvar(clienteAtual, ResourceEnum.RESOURCE_PUT));
+        return clienteService.salvar(clienteAtual, ResourceEnum.RESOURCE_PUT);
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -66,7 +66,7 @@ public class ClienteController {
         clienteService.deletar(id);
     }
 
-    private ClienteDTO toModel(Cliente cliente){
+    /*private ClienteDTO toModel(Cliente cliente){
         ClienteDTO clienteDTO = new ClienteDTO();
         clienteDTO.setId(cliente.getId());
         clienteDTO.setNome(cliente.getNome());
@@ -80,6 +80,6 @@ public class ClienteController {
         return clientes.stream()
                 .map(this::toModel)
                 .collect(Collectors.toList());
-    }
+    }*/
 
 }
