@@ -67,8 +67,14 @@ public class PagamentoController {
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/{pagamentoid}")
     public PagamentoDTO alterarPagamento(@PathVariable("pagamentoid") Long id,
-                                      @RequestBody Pagamento pagamento) {
-        return toModel(pagamentoService.salvar(pagamento));
+                                      @RequestBody PagamentoInput pagamentoInput) {
+        try{
+            Pagamento pagamentoAtual = pagamentoService.buscar(id);
+            pagamentoInputDisassembler.copyToDomainObject(pagamentoInput, pagamentoAtual);
+            return toModel(pagamentoService.salvar(pagamentoAtual));
+        } catch (ClienteNaoExistenteException | MeioPagamentoNaoExistenteException e){
+            throw new NegocioException(e.getMessage());
+        }
     }
 
     @ResponseStatus(HttpStatus.OK)

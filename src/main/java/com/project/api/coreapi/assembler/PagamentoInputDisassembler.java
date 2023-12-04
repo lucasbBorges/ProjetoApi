@@ -1,6 +1,8 @@
 package com.project.api.coreapi.assembler;
 
 import com.project.api.coreapi.model.input.PagamentoInput;
+import com.project.api.domain.model.Cliente;
+import com.project.api.domain.model.MeioPagamento;
 import com.project.api.domain.model.Pagamento;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,5 +15,11 @@ public class PagamentoInputDisassembler {
 
     public Pagamento toDomainObject(PagamentoInput pagamentoInput) {
         return modelMapper.map(pagamentoInput, Pagamento.class);
+    }
+
+    public void copyToDomainObject(PagamentoInput pagamentoInput, Pagamento pagamento){
+        pagamento.setCliente(new Cliente());
+        pagamento.setMeioPagamento(new MeioPagamento());
+        modelMapper.map(pagamentoInput, pagamento);
     }
 }
