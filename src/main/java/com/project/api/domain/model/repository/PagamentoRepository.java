@@ -12,4 +12,5 @@ import java.util.List;
 public interface PagamentoRepository extends JpaRepository<Pagamento, Long> {
     List<Pagamento> findByClienteId(Long id);
     List<Pagamento> findByClienteIdAndDataPagamentoBetween(Long id, LocalDate dataIni, LocalDate dataFim);
+    List<Pagamento> findByDataPagamentoBetween(LocalDate dataIni, LocalDate dataFim);
 }

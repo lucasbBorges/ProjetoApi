@@ -44,7 +44,7 @@ public class PagamentoController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/cliente")
     public List<PagamentoDTO> buscarPagamentoPorNome(
-            @RequestParam Long clienteId,
+            @RequestParam(required = false) Long clienteId,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataIni,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim
     ){

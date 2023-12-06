@@ -37,6 +37,8 @@ public class PagamentoService {
     public List<Pagamento> buscarPorCliente(Long clienteId, LocalDate dataIni, LocalDate dataFim){
         if (dataIni == null || dataFim == null){
             return pagamentoRepository.findByClienteId(clienteId);
+        } else if(clienteId == null){
+            return pagamentoRepository.findByDataPagamentoBetween(dataIni, dataFim);
         }
         return pagamentoRepository.findByClienteIdAndDataPagamentoBetween(
                 clienteId, dataIni, dataFim
