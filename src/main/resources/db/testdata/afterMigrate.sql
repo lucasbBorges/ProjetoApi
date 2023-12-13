@@ -1,12 +1,14 @@
 set foreign_key_checks = 0;
 
 delete from cliente;
+delete from atividade;
 delete from meio_pagamento;
 delete from pagamento;
 
 set foreign_key_checks = 1;
 
 alter table cliente auto_increment = 1;
+alter table atividade auto_increment = 1;
 alter table meio_pagamento auto_increment = 1;
 alter table pagamento auto_increment = 1;
 
@@ -17,6 +19,10 @@ insert into cliente (id, nome, email, celular, data_atualizacao, data_cadastro) 
 
 insert into meio_pagamento (id, descricao) values (1, 'DINHEIRO');
 insert into meio_pagamento (id, descricao) values (2, 'PIX');
+
+insert into atividade (id, descricao) values (1, 'CONSULTA');
+insert into atividade (id, descricao) values (2, 'LIMPEZA DE CUMBUCA');
+insert into atividade (id, descricao) values (3, 'TRABALHOS');
 
 INSERT INTO PAGAMENTO (ID, CLIENTE_ID, meio_pagamento_id, DATA_PAGAMENTO, VALOR)
 VALUES (1,1,1, utc_timestamp, 100);
