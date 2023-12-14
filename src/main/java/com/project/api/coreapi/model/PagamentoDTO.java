@@ -1,5 +1,6 @@
 package com.project.api.coreapi.model;
 
+import com.project.api.domain.model.MeioPagamento;
 import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,7 +15,7 @@ import java.time.LocalDateTime;
 public class PagamentoDTO {
     private Long id;
     private BigDecimal valor;
-    private String tipoPagamento;
+    private MeioPagamento meioPagamento;
     private LocalDate dataPagamento;
 
     private ClienteDTO cliente;
