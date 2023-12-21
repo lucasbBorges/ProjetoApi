@@ -1,5 +1,6 @@
 package com.project.api.coreapi.model;
 
+import com.project.api.domain.model.Atividade;
 import com.project.api.domain.model.MeioPagamento;
 import jakarta.persistence.Column;
 import lombok.Getter;
@@ -16,7 +17,7 @@ public class PagamentoDTO {
     private Long id;
     private BigDecimal valor;
     private MeioPagamento meioPagamento;
+    private Atividade atividade;
     private LocalDate dataPagamento;
-
     private ClienteDTO cliente;
 }

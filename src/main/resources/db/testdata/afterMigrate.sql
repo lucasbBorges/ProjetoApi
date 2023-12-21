@@ -24,19 +24,19 @@ insert into atividade (id, descricao) values (1, 'CONSULTA');
 insert into atividade (id, descricao) values (2, 'LIMPEZA DE CUMBUCA');
 insert into atividade (id, descricao) values (3, 'TRABALHOS');
 
-INSERT INTO PAGAMENTO (ID, CLIENTE_ID, meio_pagamento_id, DATA_PAGAMENTO, VALOR)
-VALUES (1,1,1, utc_timestamp, 100);
-INSERT INTO PAGAMENTO (ID, CLIENTE_ID, meio_pagamento_id, DATA_PAGAMENTO, VALOR)
-VALUES (2,1,2, utc_timestamp, 150);
-INSERT INTO PAGAMENTO (ID, CLIENTE_ID, meio_pagamento_id, DATA_PAGAMENTO, VALOR)
-VALUES (3,1,1, utc_timestamp, 70);
-INSERT INTO PAGAMENTO (ID, CLIENTE_ID, meio_pagamento_id, DATA_PAGAMENTO, VALOR)
-VALUES (4,2,1, utc_timestamp, 200);
-INSERT INTO PAGAMENTO (ID, CLIENTE_ID, meio_pagamento_id, DATA_PAGAMENTO, VALOR)
-VALUES (5,2,2, utc_timestamp, 60);
-INSERT INTO PAGAMENTO (ID, CLIENTE_ID, meio_pagamento_id, DATA_PAGAMENTO, VALOR)
-VALUES (6,3,2, utc_timestamp, 300);
-INSERT INTO PAGAMENTO (ID, CLIENTE_ID, meio_pagamento_id, DATA_PAGAMENTO, VALOR)
-VALUES (7,4,1, utc_timestamp, 400);
-INSERT INTO PAGAMENTO (ID, CLIENTE_ID, meio_pagamento_id, DATA_PAGAMENTO, VALOR)
-VALUES (8,4,2, utc_timestamp, 70);
+INSERT INTO PAGAMENTO (ID, CLIENTE_ID, meio_pagamento_id, atividade_id, DATA_PAGAMENTO, VALOR)
+VALUES (1,1,1,1, utc_timestamp, 100);
+INSERT INTO PAGAMENTO (ID, CLIENTE_ID, meio_pagamento_id, atividade_id, DATA_PAGAMENTO, VALOR)
+VALUES (2,1,2,1, utc_timestamp, 150);
+INSERT INTO PAGAMENTO (ID, CLIENTE_ID, meio_pagamento_id, atividade_id, DATA_PAGAMENTO, VALOR)
+VALUES (3,1,1,2, utc_timestamp, 70);
+INSERT INTO PAGAMENTO (ID, CLIENTE_ID, meio_pagamento_id, atividade_id, DATA_PAGAMENTO, VALOR)
+VALUES (4,2,1,2, utc_timestamp, 200);
+INSERT INTO PAGAMENTO (ID, CLIENTE_ID, meio_pagamento_id, atividade_id, DATA_PAGAMENTO, VALOR)
+VALUES (5,2,2,2, utc_timestamp, 60);
+INSERT INTO PAGAMENTO (ID, CLIENTE_ID, meio_pagamento_id, atividade_id, DATA_PAGAMENTO, VALOR)
+VALUES (6,3,2,3, utc_timestamp, 300);
+INSERT INTO PAGAMENTO (ID, CLIENTE_ID, meio_pagamento_id, atividade_id, DATA_PAGAMENTO, VALOR)
+VALUES (7,4,1,3, utc_timestamp, 400);
+INSERT INTO PAGAMENTO (ID, CLIENTE_ID, meio_pagamento_id, atividade_id, DATA_PAGAMENTO, VALOR)
+VALUES (8,4,2,3, utc_timestamp, 70);

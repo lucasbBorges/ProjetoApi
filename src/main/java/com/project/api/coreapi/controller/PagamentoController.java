@@ -97,6 +97,7 @@ public class PagamentoController {
         pagamentoDTO.setMeioPagamento(pagamento.getMeioPagamento());
         pagamentoDTO.setDataPagamento(pagamento.getDataPagamento());
         pagamentoDTO.setCliente(clienteDTO);
+        pagamentoDTO.setAtividade(pagamento.getAtividade());
 
         return pagamentoDTO;
     }

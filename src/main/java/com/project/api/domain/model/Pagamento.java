@@ -28,6 +28,10 @@ public class Pagamento {
     @JoinColumn(name = "cliente_id", nullable = false)
     private Cliente cliente;
 
+    @ManyToOne
+    @JoinColumn(name = "atividade_id", nullable = false)
+    private Atividade atividade;
+
     private BigDecimal valor;
 
     private LocalDate dataPagamento;
