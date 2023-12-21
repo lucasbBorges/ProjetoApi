@@ -1,6 +1,7 @@
 package com.project.api.coreapi.assembler;
 
 import com.project.api.coreapi.model.input.PagamentoInput;
+import com.project.api.domain.model.Atividade;
 import com.project.api.domain.model.Cliente;
 import com.project.api.domain.model.MeioPagamento;
 import com.project.api.domain.model.Pagamento;
@@ -20,6 +21,7 @@ public class PagamentoInputDisassembler {
     public void copyToDomainObject(PagamentoInput pagamentoInput, Pagamento pagamento){
         pagamento.setCliente(new Cliente());
         pagamento.setMeioPagamento(new MeioPagamento());
+        pagamento.setAtividade(new Atividade());
         modelMapper.map(pagamentoInput, pagamento);
     }
 }
