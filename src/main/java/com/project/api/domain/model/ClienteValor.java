@@ -4,12 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @Getter
 @Setter
-public class Resumo {
+public class ClienteValor {
+    private String cliente;
     private BigDecimal valor;
-    private List<AtividadeValor> atividadeValorList;
-    private List<ClienteValor> clienteValorList;
 }

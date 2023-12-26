@@ -1,6 +1,7 @@
 package com.project.api.domain.model.repository;
 
 import com.project.api.domain.model.AtividadeValor;
+import com.project.api.domain.model.ClienteValor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -13,5 +14,6 @@ import java.util.List;
 public interface ResumoRepository {
     BigDecimal buscarResumoFaturamento(LocalDate dataIni, LocalDate dataFim);
     List<AtividadeValor> buscarAtividadeValor(LocalDate dataIni, LocalDate dataFim);
+    List<ClienteValor> buscarClienteValor(LocalDate dataIni, LocalDate dataFim);
 }
 

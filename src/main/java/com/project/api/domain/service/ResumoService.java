@@ -1,6 +1,7 @@
 package com.project.api.domain.service;
 
 import com.project.api.domain.model.AtividadeValor;
+import com.project.api.domain.model.ClienteValor;
 import com.project.api.domain.model.Resumo;
 import com.project.api.domain.model.repository.ResumoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ public class ResumoService {
         Resumo resumo = new Resumo();
         resumo.setValor(buscarFaturamento(dataIni, dataFim));
         resumo.setAtividadeValorList(buscarAtividadeValorList(dataIni, dataFim));
+        resumo.setClienteValorList(buscarClienteValorList(dataIni, dataFim));
         return resumo;
     }
 
@@ -32,5 +34,9 @@ public class ResumoService {
 
     private List<AtividadeValor> buscarAtividadeValorList(LocalDate dataIni, LocalDate dataFim){
         return resumoRepository.buscarAtividadeValor(dataIni, dataFim);
+    }
+
+    private List<ClienteValor> buscarClienteValorList(LocalDate dataIni, LocalDate dataFim){
+        return resumoRepository.buscarClienteValor(dataIni, dataFim);
     }
 }
