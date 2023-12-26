@@ -8,5 +8,6 @@ import java.util.List;
 
 @Repository
 public interface AtividadeRepository extends JpaRepository<Atividade, Long> {
-    public List<Atividade> findByDescricaoContaining(String nome);
+    public Boolean existsByDescricao(String descricao);
+    public List<Atividade> findByDescricaoContaining(String descricao);
 }

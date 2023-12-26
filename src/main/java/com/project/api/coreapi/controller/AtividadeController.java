@@ -1,6 +1,7 @@
 package com.project.api.coreapi.controller;
 
 import com.project.api.domain.model.Atividade;
+import com.project.api.domain.model.ResourceEnum;
 import com.project.api.domain.service.AtividadeService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class AtividadeController {
 
     @PostMapping
     public Atividade cadastrarAtividade(@RequestBody Atividade atividade){
-        return atividadeService.salvar(atividade);
+        return atividadeService.salvar(atividade, ResourceEnum.RESOURCE_POST);
     }
 
     @PutMapping("/{atividadeid}")
@@ -40,6 +41,11 @@ public class AtividadeController {
                                       @RequestBody Atividade atividade) {
         Atividade atividadeAtual = atividadeService.buscar(id);
         BeanUtils.copyProperties(atividade, atividadeAtual, "id");
-        return atividadeService.salvar(atividadeAtual);
+        return atividadeService.salvar(atividadeAtual, ResourceEnum.RESOURCE_PUT);
+    }
+
+    @DeleteMapping("/{atividadeid}")
+    public void deletar(@PathVariable("atividadeid") Long id){
+        atividadeService.deletar(id);
     }
 }

@@ -1,8 +1,10 @@
 package com.project.api.domain.service;
 
 import com.project.api.domain.exceptions.atividade.AtividadeEmUsoException;
+import com.project.api.domain.exceptions.atividade.AtividadeExistenteException;
 import com.project.api.domain.exceptions.atividade.AtividadeNaoExistenteException;
 import com.project.api.domain.exceptions.cliente.ClienteEmUsoException;
+import com.project.api.domain.exceptions.cliente.ClienteExistenteException;
 import com.project.api.domain.exceptions.meiopagamento.MeioPagamentoNaoExistenteException;
 import com.project.api.domain.model.Atividade;
 import com.project.api.domain.model.Cliente;
@@ -30,11 +32,15 @@ public class AtividadeService {
                 .orElseThrow(AtividadeNaoExistenteException::new);
     }
 
-    public List<Atividade> buscarPorNome (String nome){
-        return atividadeRepository.findByDescricaoContaining(nome);
+    public List<Atividade> buscarPorNome (String descricao){
+        return atividadeRepository.findByDescricaoContaining(descricao);
     }
 
-    public Atividade salvar (Atividade atividade){
+    public Atividade salvar (Atividade atividade, ResourceEnum ENUM){
+        if (atividadeRepository.existsByDescricao(atividade.getDescricao())
+                && ENUM == ResourceEnum.RESOURCE_POST){
+            throw new AtividadeExistenteException();
+        }
         return atividadeRepository.save(atividade);
     }
 
