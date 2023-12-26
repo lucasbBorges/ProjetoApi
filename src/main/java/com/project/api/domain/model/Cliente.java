@@ -33,4 +33,13 @@ public class Cliente {
     @UpdateTimestamp
     @Column(nullable = false, columnDefinition = "datetime")
     private LocalDate dataAtualizacao;
+    private Boolean ativo = Boolean.TRUE;
+
+    public void ativar(){
+        setAtivo(true);
+    }
+
+    public void inativar(){
+        setAtivo(false);
+    }
 }

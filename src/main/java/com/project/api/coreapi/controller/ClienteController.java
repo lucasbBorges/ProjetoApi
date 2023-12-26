@@ -60,10 +60,16 @@ public class ClienteController {
         return clienteService.salvar(clienteAtual, ResourceEnum.RESOURCE_PUT);
     }
 
-    @ResponseStatus(HttpStatus.OK)
-    @DeleteMapping(value = "/{clienteid}")
-    public void remover(@PathVariable("clienteid") Long id) {
-        clienteService.deletar(id);
+    @PutMapping("/{clienteid}/ativo")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void ativar(@PathVariable("clienteid") Long clienteId) {
+        clienteService.ativar(clienteId);
+    }
+
+    @DeleteMapping("/{clienteid}/ativo")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void inativar(@PathVariable("clienteid") Long clienteId) {
+        clienteService.inativar(clienteId);
     }
 
     /*private ClienteDTO toModel(Cliente cliente){

@@ -6,6 +6,7 @@ import com.project.api.domain.exceptions.cliente.ClienteNaoExistenteException;
 import com.project.api.domain.model.Cliente;
 import com.project.api.domain.model.ResourceEnum;
 import com.project.api.domain.model.repository.ClienteRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -55,5 +56,17 @@ public class ClienteService {
                 && !Objects.equals(clienteAtual.getId(), clienteRecebimento.getId())){
             throw new ClienteExistenteException();
         }
+    }
+
+    @Transactional
+    public void ativar(Long id){
+        Cliente clienteAtual = buscar(id);
+        clienteAtual.ativar();
+    }
+
+    @Transactional
+    public void inativar(Long id){
+        Cliente clienteAtual = buscar(id);
+        clienteAtual.inativar();
     }
 }
