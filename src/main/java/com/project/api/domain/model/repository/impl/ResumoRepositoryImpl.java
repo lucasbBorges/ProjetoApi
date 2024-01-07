@@ -2,6 +2,7 @@ package com.project.api.domain.model.repository.impl;
 
 import com.project.api.domain.model.AtividadeValor;
 import com.project.api.domain.model.ClienteValor;
+import com.project.api.domain.model.FaturamentoMes;
 import com.project.api.domain.model.repository.ResumoRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -67,6 +68,28 @@ public class ResumoRepositoryImpl implements ResumoRepository {
                     clienteValor.setCliente((String) list[0]);
                     clienteValor.setValor((BigDecimal) list[1]);
                     return clienteValor;
+                })
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<FaturamentoMes> buscarFaturamentoMesAMes(LocalDate dataIni, LocalDate dataFim) {
+        String sql = "SELECT YEAR(DATA_PAGAMENTO), MONTH(DATA_PAGAMENTO), SUM(VALOR) " +
+                "FROM PAGAMENTO " +
+                "WHERE PAGAMENTO.DATA_PAGAMENTO BETWEEN '" + dataIni.toString() + "' AND '" + dataFim.toString() + "' " +
+                "GROUP BY YEAR(DATA_PAGAMENTO), MONTH(data_pagamento)";;
+
+        Query query = manager.createNativeQuery(sql);
+        List<Object[]> resultList = query.getResultList();
+
+        return resultList
+                .stream()
+                .map(list -> {
+                    FaturamentoMes faturamentoMes = new FaturamentoMes();
+                    faturamentoMes.setAno((Integer) list[0]);
+                    faturamentoMes.setMes((Integer) list[1]);
+                    faturamentoMes.setValor((BigDecimal) list[2]);
+                    return faturamentoMes;
                 })
                 .collect(Collectors.toList());
     }

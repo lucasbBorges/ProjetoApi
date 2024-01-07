@@ -26,12 +26,4 @@ public class ResumoController {
     ){
         return resumoService.buscarResumo(dataIni, dataFim);
     }
-
-    @GetMapping(value = "/teste")
-    public Resumo teste(
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataIni,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim
-    ){
-        return resumoService.buscarResumo(dataIni, dataFim);
-    }
 }

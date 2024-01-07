@@ -12,4 +12,5 @@ public class Resumo {
     private BigDecimal valor;
     private List<AtividadeValor> atividadeValorList;
     private List<ClienteValor> clienteValorList;
+    private List<FaturamentoMes> faturamentoMesList;
 }
