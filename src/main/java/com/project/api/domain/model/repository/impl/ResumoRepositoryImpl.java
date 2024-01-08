@@ -9,7 +9,6 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import org.springframework.stereotype.Repository;
 
-import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
@@ -74,10 +73,14 @@ public class ResumoRepositoryImpl implements ResumoRepository {
 
     @Override
     public List<FaturamentoMes> buscarFaturamentoMesAMes(LocalDate dataIni, LocalDate dataFim) {
-        String sql = "SELECT YEAR(DATA_PAGAMENTO), MONTH(DATA_PAGAMENTO), SUM(VALOR) " +
-                "FROM PAGAMENTO " +
-                "WHERE PAGAMENTO.DATA_PAGAMENTO BETWEEN '" + dataIni.toString() + "' AND '" + dataFim.toString() + "' " +
-                "GROUP BY YEAR(DATA_PAGAMENTO), MONTH(data_pagamento)";;
+
+        String sql = "SELECT YEAR(DATAS.DATA), MONTH(DATAS.DATA) " +
+                "       , CASE WHEN SUM(VALOR) IS NULL THEN 0 ELSE SUM(VALOR) END VALOR " +
+                "FROM DATAS " +
+                "     LEFT JOIN PAGAMENTO ON DATAS.DATA = PAGAMENTO.DATA_PAGAMENTO " +
+                "WHERE DATAS.DATA BETWEEN '" + dataIni.toString() + "' AND '" + dataFim.toString() + "' " +
+                "GROUP BY YEAR(DATAS.DATA), MONTH(DATAS.DATA) " +
+                "ORDER BY 1, 2";
 
         Query query = manager.createNativeQuery(sql);
         List<Object[]> resultList = query.getResultList();
