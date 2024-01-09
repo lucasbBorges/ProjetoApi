@@ -23,5 +23,3 @@ BEGIN
 END //
 
 DELIMITER ;
-
-CALL PreencherTabelaDatasNoIntervalo('2022-01-01', '2030-12-31');

@@ -4,6 +4,7 @@ delete from cliente;
 delete from atividade;
 delete from meio_pagamento;
 delete from pagamento;
+delete from datas;
 
 set foreign_key_checks = 1;
 
@@ -40,3 +41,5 @@ INSERT INTO PAGAMENTO (ID, CLIENTE_ID, meio_pagamento_id, atividade_id, DATA_PAG
 VALUES (7,4,1,3, utc_timestamp, 400);
 INSERT INTO PAGAMENTO (ID, CLIENTE_ID, meio_pagamento_id, atividade_id, DATA_PAGAMENTO, VALOR)
 VALUES (8,4,2,3, utc_timestamp, 70);
+
+CALL PreencherTabelaDatasNoIntervalo('2022-01-01', '2030-12-31');
