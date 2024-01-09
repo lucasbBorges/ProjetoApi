@@ -72,20 +72,4 @@ public class ClienteController {
         clienteService.inativar(clienteId);
     }
 
-    /*private ClienteDTO toModel(Cliente cliente){
-        ClienteDTO clienteDTO = new ClienteDTO();
-        clienteDTO.setId(cliente.getId());
-        clienteDTO.setNome(cliente.getNome());
-        clienteDTO.setEmail(cliente.getEmail());
-        clienteDTO.setCelular(cliente.getCelular());
-
-        return clienteDTO;
-    }
-
-    private List<ClienteDTO> toModelList(List<Cliente> clientes){
-        return clientes.stream()
-                .map(this::toModel)
-                .collect(Collectors.toList());
-    }*/
-
 }
